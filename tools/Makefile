@@ -2,14 +2,20 @@ CC=gcc
 CFLAGS=-Wall -I../common
 LDFLAGS=
 TARGETS=upinfo upshell upload
+COMMONOBJS=../common/up3d.o ../common/up3dcomm.o ../common/up3ddata.o
+NCURSESLIBS=$(shell pkg-config --libs ncurses)
 
 all: $(TARGETS)
 
-upinfo: upinfo.c ../common/up3d.o ../common/up3dcomm.o ../common/up3ddata.o -lm -lusb-1.0
+upinfo: upinfo.c $(COMMONOBJS)
+	$(CC) upinfo.c $(CFLAGS) $(COMMONOBJS) -lm -lusb-1.0 -o upinfo
 
-upshell: upshell.c ../common/up3d.o ../common/up3dcomm.o ../common/up3ddata.o -lm -lusb-1.0 -lncurses
+upshell: upshell.c $(COMMONOBJS) 
+	$(CC) upshell.c $(CFLAGS) $(COMMONOBJS) -lm -lusb-1.0 $(NCURSESLIBS) -o upshell
 
-upload: upload.c ../common/up3d.o ../common/up3dcomm.o ../common/up3ddata.o -lm -lusb-1.0
+
+upload: upload.c $(COMMONOBJS)
+	$(CC) upload.c $(CFLAGS) $(COMMONOBJS) -lm -lusb-1.0 -o upload
 
 clean:
 	$(RM) $(TARGETS) *.o
