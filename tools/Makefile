@@ -8,14 +8,14 @@ NCURSESLIBS=$(shell pkg-config --libs ncurses)
 all: $(TARGETS)
 
 upinfo: upinfo.c $(COMMONOBJS)
-	$(CC) upinfo.c $(CFLAGS) $(COMMONOBJS) -lm -lusb-1.0 -o upinfo
+	$(CC) upinfo.c $(CFLAGS) $(LDFLAGS) $(COMMONOBJS) -lm -lusb-1.0 -o upinfo
 
-upshell: upshell.c $(COMMONOBJS) 
-	$(CC) upshell.c $(CFLAGS) $(COMMONOBJS) -lm -lusb-1.0 $(NCURSESLIBS) -o upshell
+upshell: upshell.c $(COMMONOBJS)
+	$(CC) upshell.c $(CFLAGS) $(LDFLAGS) $(COMMONOBJS) -lm -lusb-1.0 $(NCURSESLIBS) -o upshell
 
 
 upload: upload.c $(COMMONOBJS)
-	$(CC) upload.c $(CFLAGS) $(COMMONOBJS) -lm -lusb-1.0 -o upload
+	$(CC) upload.c $(CFLAGS) $(LDFLAGS) $(COMMONOBJS) -lm -lusb-1.0 -o upload
 
 clean:
 	$(RM) $(TARGETS) *.o
