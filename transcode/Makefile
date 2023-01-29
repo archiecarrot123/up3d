@@ -4,7 +4,8 @@ LDFLAGS=
 TARGETS=up3dtranscode
 all: $(TARGETS)
 
-up3dtranscode: up3dtranscode.c up3dconf.c hoststepper.c hostplanner.c gcodeparser.c umcwriter.c ../common/up3ddata.o -lm
+up3dtranscode: up3dtranscode.c up3dconf.c hoststepper.c hostplanner.c gcodeparser.c umcwriter.c ../common/up3ddata.o
+	$(CC) up3dtranscode.c up3dconf.c hoststepper.c hostplanner.c gcodeparser.c umcwriter.c $(CFLAGS) $(LDFLAGS) ../common/up3ddata.o -lm -o up3dtranscode
 
 clean:
 	$(RM) $(TARGETS) *.o
